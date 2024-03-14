@@ -4,7 +4,6 @@ from fastapi import FastAPI, Query, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-
 app = FastAPI()
 
 app.add_middleware(
@@ -15,14 +14,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load the mock data from the JSON file
+# Loads the mock data from the JSON file
 with open("data/data.json", "r") as f:
     mock_data = json.load(f)
 
-
 @app.get("/api/posts")
 def get_posts(start: int = Query(0, ge=0), limit: int = Query(10, ge=1)):
-    # Slicing the data list based on the start parameter
     posts: List = mock_data[start:start+limit]
     return JSONResponse(posts)
 
