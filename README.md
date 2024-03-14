@@ -46,9 +46,9 @@ python3 -m venv venv
   ```
 4. Install the required Python packages:
 ```
-pip install fast api uvicorn
+pip install fastapi uvicorn
 #or 
-pip3 install fast api uvicorn
+pip3 install fastapi uvicorn
 ```
 6. Start the FastAPI server
 ```
