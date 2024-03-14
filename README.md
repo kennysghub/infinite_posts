@@ -30,6 +30,8 @@ cd server/
 2. Create a virtual environment (recommended):
 ```
 python -m venv venv
+#or
+python3 -m venv venv
 ```
 3. Activate the virtual environment:
 
@@ -45,10 +47,12 @@ python -m venv venv
 4. Install the required Python packages:
 ```
 pip install fast api uvicorn
+#or 
+pip3 install fast api uvicorn
 ```
 6. Start the FastAPI server
 ```
-uvicorn main:app --reload
+uvicorn src.main:app --reload 
 ```
 
 7. In a separate terminal, navigate to the frontend directory:
@@ -75,14 +79,14 @@ The project is organized into two main directories:
 
 `client`: Contains the React frontend code
 - `src/components`: Contains the main React components
- - `PostList.tsx`: Displays the list of posts
- - `Post.tsx`: Displays an individual post with its details and comments
+  - `PostList.tsx`: Displays the list of posts
+  - `Post.tsx`: Displays an individual post with its details and comments
 - `src/hooks`: Contains custom hooks used in the application
- - `useInfiniteScroll.ts`: Implements the infinite scroll functionality
- - `useHugs.ts`: Handles the "Hug" functionality for a post
- - `useComments.ts`: Handles the "Comment" functionality for a post
+  - `useInfiniteScroll.ts`: Implements the infinite scroll functionality
+  - `useHugs.ts`: Handles the "Hug" functionality for a post
+  - `useComments.ts`: Handles the "Comment" functionality for a post
 - `src/utils`: Contains utility functions
- - `api.ts`: Defines the API endpoints and functions for making requests to the backend
+  - `api.ts`: Defines the API endpoints and functions for making requests to the backend
 - `src/types.ts`: Defines the TypeScript types and interfaces used in the application
 
 ## API Endpoints
