@@ -1,83 +1,98 @@
 import React from "react";
-import hugIcon from "../assets/hug-icon.png";
-interface Comment {
-  id: number;
-  parent_id: number | null;
-  display_name: string;
-  text: string;
-  created_at: string;
-  // Add any other properties of the comment object
-}
 
-interface Post {
-  post_url: string;
-  comments: { [key: string]: Comment };
-  title: string;
-  patient_description: string;
-  assessment: string;
-  question: string;
-  num_hugs: number;
-  created_at: string;
-}
+import { PostType } from "../types";
+
+import hugIcon from "../assets/hug-icon.png";
+import useHugs from "../hooks/useHugs";
+import useComments from "../hooks/useComments";
+
+import { Button, Fab } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import TextField from "@mui/material/TextField";
+import Badge from "@mui/material/Badge";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 interface PostProps {
-  post: Post;
+  post: PostType;
   isLastPost?: boolean;
   lastPostRef?: React.RefObject<HTMLDivElement>;
-  onHugClick: (url: string) => void;
-  onCommentSubmit: (postUrl: string, commentText: string) => void;
-  comments: { [key: string]: Comment };
 }
 
-const Post: React.FC<PostProps> = ({
-  post,
-  isLastPost,
-  lastPostRef,
-  onHugClick,
-  onCommentSubmit,
-}) => {
-  const [commentText, setCommentText] = React.useState("");
-  const [showComments, setShowComments] = React.useState(false);
+const Post: React.FC<PostProps> = ({ post, isLastPost, lastPostRef }) => {
+  const { num_hugs, handleHugClick } = useHugs(post.post_url, post.num_hugs);
+  const {
+    showComments,
+    toggleComments,
+    comments,
+    commentText,
+    setCommentText,
+    handleCommentSubmit,
+  } = useComments(post.post_url, post.comments);
 
-  const toggleComments = () => {
-    setShowComments(!showComments);
-  };
-
-  const handleHugClick = () => {
-    onHugClick(post.post_url);
-  };
-
-  const handleCommentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onCommentSubmit(post.post_url, commentText);
-    setCommentText("");
-  };
   return (
     <div ref={isLastPost ? lastPostRef : null} style={styles.container}>
-      <h2 style={styles.title}>{post.title}</h2>
-      <p style={styles.content}>{post.patient_description}</p>
-      <p>Assessment: {post.assessment}</p>
-      <button onClick={handleHugClick}>
-        {post.num_hugs} <img src={hugIcon} height="25px" /> Hugs
-      </button>
-      <button onClick={toggleComments}>{showComments ? "Hide Comments" : "Show Comments"}</button>
+      <CardContent>
+        <Typography sx={{ fontSize: 30 }} color="secondary" gutterBottom>
+          {post.title}
+        </Typography>
+        <Typography color="dodgerblue" variant="h4" component="div">
+          Description
+        </Typography>
+        <Typography variant="h6" component="div">
+          {post.patient_description}
+        </Typography>
+        <Typography color="dodgerblue" sx={{ mb: 1.5, mt: 2 }} variant="h4">
+          Assessment
+        </Typography>
+        <Typography variant="body2" sx={{ fontSize: 20 }} color="text.primary">
+          {post.assessment}
+        </Typography>
+      </CardContent>
+
+      <Badge
+        badgeContent={num_hugs}
+        onClick={handleHugClick}
+        color="primary"
+        style={{ cursor: "pointer" }}
+      >
+        <img src={hugIcon} height="45px" />
+      </Badge>
+      <Button
+        size="small"
+        color="secondary"
+        variant="contained"
+        sx={{ ml: 5 }}
+        onClick={toggleComments}
+      >
+        {showComments ? "Hide Comments" : "Show Comments"}
+      </Button>
+
       {showComments && (
         <div>
           <ul>
-            {Object.values(post.comments).map((comment) => (
-              <li key={comment.id}>
-                <strong>{comment.display_name}:</strong> {comment.text}
+            {Object.values(comments).map((comment) => (
+              <li style={{ listStyleType: "none", padding: 0 }} key={comment.id}>
+                <strong style={{ fontSize: "22px" }}>{comment.display_name}:</strong>
+                <span style={{ fontSize: "20px" }}> {comment.text}</span>
               </li>
             ))}
           </ul>
           <form onSubmit={handleCommentSubmit}>
-            <input
+            <TextField
+              style={{ width: 500 }}
+              id="standard-textarea"
+              label="Comment here..."
+              placeholder="Placeholder"
+              multiline
+              variant="standard"
               type="text"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              placeholder="Add a comment..."
             />
-            <button type="submit">Submit</button>
+            <Fab type="submit" size="small" color="primary" aria-label="add" sx={{ ml: 1 }}>
+              <AddIcon />
+            </Fab>
           </form>
         </div>
       )}
@@ -89,9 +104,10 @@ const styles: { [key: string]: React.CSSProperties } = {
   container: {
     marginBottom: 20,
     padding: 20,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "whitesmoke",
     borderRadius: 8,
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    maxWidth: "90vw",
   },
   title: {
     fontSize: 20,

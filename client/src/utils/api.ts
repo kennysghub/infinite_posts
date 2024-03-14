@@ -1,34 +1,16 @@
 import axios, { AxiosResponse } from "axios";
-
-interface Comment {
-  id: number;
-  parent_id: number | null;
-  display_name: string;
-  text: string;
-  created_at: string;
-  // Add any other properties of the comment object
-}
-
-interface Post {
-  id: number;
-  title: string;
-  num_hugs: number;
-  patient_description: string;
-  assessment: string;
-  question: string;
-  comments: { [key: string]: Comment };
-  created_at: string;
-  post_url: string;
-  // Add any other properties of the post object
-}
+import { Comment, PostType } from "../types";
 
 const apiClient = axios.create({
   baseURL: "http://localhost:8000",
 });
 
-export const fetchPosts = async (startIndex: number = 0, limit: number = 10): Promise<Post[]> => {
+export const fetchPosts = async (
+  startIndex: number = 0,
+  limit: number = 10
+): Promise<PostType[]> => {
   try {
-    const response: AxiosResponse<Post[]> = await apiClient.get(
+    const response: AxiosResponse<PostType[]> = await apiClient.get(
       `/api/posts?start=${startIndex}&limit=${limit}`
     );
     return response.data;
@@ -38,9 +20,9 @@ export const fetchPosts = async (startIndex: number = 0, limit: number = 10): Pr
   }
 };
 
-export const createPost = async (data: Partial<Post>): Promise<Post> => {
+export const createPost = async (data: Partial<PostType>): Promise<PostType> => {
   try {
-    const response: AxiosResponse<Post> = await apiClient.post("/api/posts", data);
+    const response: AxiosResponse<PostType> = await apiClient.post("/api/posts", data);
     return response.data;
   } catch (error) {
     console.error("Error creating post:", error);
@@ -48,34 +30,24 @@ export const createPost = async (data: Partial<Post>): Promise<Post> => {
   }
 };
 
-// ... (keep the existing code)
-
 export const updatePostHugs = async (postUrl: string) => {
-  const response = await fetch(
-    `http://localhost:8000/api/posts/${encodeURIComponent(postUrl)}/hugs`,
-    {
-      method: "PUT",
-    }
-  );
-  if (!response.ok) {
-    throw new Error("Failed to update hugs");
+  try {
+    await apiClient.put(`/api/posts/${encodeURIComponent(postUrl)}/hugs`);
+  } catch (error) {
+    console.error("Error updating hugs:", error);
+    throw error;
   }
 };
 
-export const addComment = async (postUrl: string, commentText: string) => {
-  const response = await fetch(
-    `http://localhost:8000/api/posts/${encodeURIComponent(postUrl)}/comments`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text: commentText }),
-    }
-  );
-  if (!response.ok) {
-    throw new Error(`Failed to add comment: ${response.statusText}`);
+export const addComment = async (postUrl: string, commentText: string): Promise<Comment> => {
+  try {
+    const response: AxiosResponse<Comment> = await apiClient.post(
+      `/api/posts/${encodeURIComponent(postUrl)}/comments`,
+      { text: commentText }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error adding comment:", error);
+    throw error;
   }
-  const data: Comment = await response.json();
-  return data;
 };
