@@ -83,6 +83,7 @@ The project is organized into two main directories:
   - `Post.tsx`: Displays an individual post with its details and comments
 - `src/hooks`: Contains custom hooks used in the application
   - `useInfiniteScroll.ts`: Implements the infinite scroll functionality
+    - *Note: A 1 second timeout was implemented to mimic any potential network latency and to highlght that posts are fetched dynamically as the user     scrolls, rather then rendering all at once. 
   - `useHugs.ts`: Handles the "Hug" functionality for a post
   - `useComments.ts`: Handles the "Comment" functionality for a post
 - `src/utils`: Contains utility functions
