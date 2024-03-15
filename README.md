@@ -1,4 +1,4 @@
-# Infinite Blogs
+# Infinite Posts
 
 The application is built using React with TypeScript for the frontend and Python with FastAPI for the backend.
 
