@@ -1,5 +1,4 @@
-# Take Home - AuxHealth
-Take home asssessment for AuxHealth
+# Infinite Blogs
 
 The application is built using React with TypeScript for the frontend and Python with FastAPI for the backend.
 
