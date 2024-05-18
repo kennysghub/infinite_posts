@@ -56,7 +56,7 @@ const Post: React.FC<PostProps> = ({ post, isLastPost, lastPostRef }) => {
         color="primary"
         style={{ cursor: "pointer" }}
       >
-        <img src={hugIcon} height="45px" />
+        <img src={hugIcon} height="45px" alt="Hug Icon" />
       </Badge>
       <Button
         size="small"
@@ -71,10 +71,10 @@ const Post: React.FC<PostProps> = ({ post, isLastPost, lastPostRef }) => {
       {showComments && (
         <div>
           <ul>
-            {Object.values(comments).map((comment) => (
-              <li style={{ listStyleType: "none", padding: 0 }} key={comment.id}>
-                <strong style={{ fontSize: "22px" }}>{comment.display_name}:</strong>
-                <span style={{ fontSize: "20px" }}> {comment.text}</span>
+            {Object.values(comments).map(({ id, display_name, text }) => (
+              <li style={{ listStyleType: "none", padding: 0 }} key={id}>
+                <strong style={{ fontSize: "22px" }}>{display_name}:</strong>
+                <span style={{ fontSize: "20px" }}>{text}</span>
               </li>
             ))}
           </ul>
@@ -90,7 +90,13 @@ const Post: React.FC<PostProps> = ({ post, isLastPost, lastPostRef }) => {
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
             />
-            <Fab type="submit" size="small" color="primary" aria-label="add" sx={{ ml: 1 }}>
+            <Fab
+              type="submit"
+              size="small"
+              color="primary"
+              aria-label="add"
+              sx={{ ml: 1 }}
+            >
               <AddIcon />
             </Fab>
           </form>

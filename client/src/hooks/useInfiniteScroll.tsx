@@ -19,7 +19,10 @@ const useInfiniteScroll = (
       const newPosts = await fetchPosts(startIndex);
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      setPosts((prevPosts) => [...prevPosts, ...(newPosts as unknown as PostType[])]);
+      setPosts((prevPosts) => [
+        ...prevPosts,
+        ...(newPosts as unknown as PostType[]),
+      ]);
       setStartIndex((prevStartIndex) => prevStartIndex + newPosts.length);
     } catch (err: unknown) {
       setError((err as Error).message);
@@ -69,7 +72,12 @@ const useInfiniteScroll = (
     };
   }, [fetchMorePosts, isLoadingMore]);
 
-  return { loading, error, lastPostRef, fetchMorePosts: { loading: isLoadingMore } };
+  return {
+    loading,
+    error,
+    lastPostRef,
+    fetchMorePosts: { loading: isLoadingMore },
+  };
 };
 
 export default useInfiniteScroll;
