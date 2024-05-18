@@ -3,7 +3,7 @@
     "post_url": "37F+Experiencing+a+range+of+symptoms+including+nausea+and+frequent+urination-00001685",
     "title": "[37F] Experiencing a range of symptoms including nausea and frequent urination",
     "created_at": "2024-03-04T22:05:16.998787",
-    "num_hugs": 17,
+    "num_hugs": 18,
     "patient_description": "A 37-year-old female presents with a constellation of symptoms including fatigue, frequent urination, irritability, mood swings, food aversions, cravings, nausea, back pain, bloating, temperature sensitivity, and episodes of crying. The nausea is described as frequent, occurring regardless of food intake, and has been persistent for a couple of weeks, with a severity rating of 3 out of 10. The patient notes that the nausea does not seem to be triggered or alleviated by specific activities or situations. Additionally, the patient reports frequent urination that has also been occurring for a few weeks, but with no change in volume compared to usual. The patient denies the presence of fever or chills. There is also a mention of unprotected sexual activity, but no new sexual partners. No other medical conditions or symptoms were disclosed during the conversation.",
     "assessment": "### What might be happening\n\nBased on the information you've provided, a few possibilities could explain your symptoms:\n\n- Pregnancy: Your symptoms such as fatigue, mood swings, aversion to some foods, cravings, nausea, back pain, bloating, and frequent urination are common early signs of pregnancy. Given that you've mentioned unprotected sexual activity, this could be a possibility.\n  - Pregnancy can be confirmed with a home pregnancy test or a blood test at a doctor's office.\n\n- Premenstrual Syndrome (PMS): Some of your symptoms like mood swings, food cravings, bloating, and fatigue can occur due to hormonal changes in the days leading up to your period.\n  - Treatment usually involves lifestyle changes like regular exercise, a balanced diet, and adequate sleep. Over-the-counter pain relievers can help with physical symptoms.\n\n- Urinary Tract Infection (UTI): Frequent urination and back pain can be symptoms of a UTI.\n  - UTIs are typically treated with antibiotics prescribed by a doctor.\n\n### What you can do\n\n1. Consider taking a home pregnancy test if you suspect you might be pregnant. These tests are usually accurate about a week after your missed period.\n2. Try to maintain a healthy lifestyle with regular exercise, a balanced diet, and adequate sleep. This can help manage symptoms of PMS.\n3. Drink plenty of water to help flush out your urinary tract if you suspect a UTI. However, you should still see a doctor for a proper diagnosis and treatment.\n4. Consult a healthcare professional to discuss your symptoms and get a proper diagnosis.\n\n### What you should look out for\n\nSeek immediate medical attention if:\n\n- Your symptoms worsen or persist for a prolonged period.\n- You have severe abdominal or back pain.\n- You notice blood in your urine.\n- You have a high fever, severe headache, chest pain, or other worrying symptoms.\n\nPlease remember that while I strive to provide accurate information, I'm an AI and not a substitute for professional medical advice. Always consult a healthcare professional for a formal diagnosis.",
     "question": "",
@@ -69,6 +69,20 @@
         "parent_id": null,
         "display_name": "User",
         "text": "Testing",
+        "created_at": "2024-03-13T00:00:00.000000"
+      },
+      "10": {
+        "id": 10,
+        "parent_id": null,
+        "display_name": "User",
+        "text": "Ello Matey",
+        "created_at": "2024-03-13T00:00:00.000000"
+      },
+      "11": {
+        "id": 11,
+        "parent_id": null,
+        "display_name": "User",
+        "text": "Get well soon!",
         "created_at": "2024-03-13T00:00:00.000000"
       }
     }
